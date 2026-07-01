@@ -5,19 +5,46 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
 	title?: string;
+	descrizione?: string;
+	immagine?: string;
 }
 
-const { title = 'Rione Giallo' } = Astro.props;
+const {
+	title = 'Rione Giallo',
+	descrizione = 'Il sito ufficiale del Rione Giallo Galeotto Manfredi di Faenza, il rione di Porta Ponte. Palio del Niballo, sbandieratori, musici e vita rionale.',
+	immagine = '/logo.png',
+} = Astro.props;
+
+const urlCanonica = Astro.url.href;
 ---
 
 <html lang="it">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/logo.png" />
+
+		<title>{title}</title>
+		<meta name="description" content={descrizione} />
+		<link rel="canonical" href={urlCanonica} />
+
+		<!-- Open Graph (WhatsApp, Facebook) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={descrizione} />
+		<meta property="og:image" content={immagine} />
+		<meta property="og:locale" content="it_IT" />
+		<meta property="og:site_name" content="Rione Giallo" />
+
+		<!-- Twitter/X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={descrizione} />
+		<meta name="twitter:image" content={immagine} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-		<title>{title}</title>
 	</head>
 	<body class="min-h-screen flex flex-col">
 		<Navbar />

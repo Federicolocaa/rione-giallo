@@ -1,10 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const articoli = (await getCollection('news')).sort(
+	(a, b) => b.data.data.valueOf() - a.data.data.valueOf()
+);
 ---
 
 <Layout title="News — Rione Giallo">
 	<div class="max-w-3xl mx-auto px-6 py-12">
 		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">News</h1>
-		<p class="mt-4 text-gray-600">Aggiornamenti e novità dal Rione Giallo. Contenuto in arrivo.</p>
+		<p class="mt-4 text-gray-600">Aggiornamenti e novità dal Rione Giallo di Porta Ponte.</p>
+
+		<div class="mt-10 space-y-6">
+			{articoli.map((a) => (
+				<a href={`/news/${a.id}`} class="group block bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600 hover:bg-giallo-100 transition">
+					<p class="text-sm font-semibold text-amaranto-700">
+						{a.data.data.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+					</p>
+					<h2 class="font-display text-2xl uppercase text-giallo-700 group-hover:text-giallo-800 mt-1">{a.data.titolo}</h2>
+					<p class="text-gray-600 mt-2">{a.data.sommario}</p>
+					<span class="inline-block mt-3 text-sm font-semibold text-amaranto-700 group-hover:underline">Leggi tutto →</span>
+				</a>
+			))}
+		</div>
 	</div>
 </Layout>

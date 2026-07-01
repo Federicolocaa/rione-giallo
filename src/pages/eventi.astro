@@ -1,23 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const eventi = [
-	{ data: 'Da definire', titolo: 'Cena propiziatoria', desc: 'Il tradizionale ritrovo conviviale prima del Palio.' },
-];
+const oggi = new Date();
+const tutti = (await getCollection('eventi')).sort(
+	(a, b) => a.data.data.valueOf() - b.data.data.valueOf()
+);
+const prossimi = tutti.filter((e) => e.data.data >= oggi);
+const passati = tutti.filter((e) => e.data.data < oggi).reverse();
+
+function formatta(d: Date) {
+	return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 ---
 
 <Layout title="Eventi — Rione Giallo">
 	<div class="max-w-3xl mx-auto px-6 py-12">
 		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Eventi</h1>
-		<p class="mt-4 text-gray-600">Tutti gli appuntamenti del rione durante l'anno. Aggiornati man mano.</p>
-		<div class="mt-10 space-y-4">
-			{eventi.map((e) => (
-				<div class="bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
-					<p class="text-sm font-semibold text-amaranto-700">{e.data}</p>
-					<h2 class="font-display text-xl uppercase text-giallo-700 mt-1">{e.titolo}</h2>
-					<p class="text-sm text-gray-600 mt-1">{e.desc}</p>
+		<p class="mt-4 text-gray-600">Tutti gli appuntamenti del Rione Giallo durante l'anno.</p>
+
+		<h2 class="font-display text-2xl uppercase text-giallo-600 mt-12">Prossimi eventi</h2>
+		{prossimi.length > 0 ? (
+			<div class="mt-6 space-y-4">
+				{prossimi.map((e) => (
+					<div class="bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
+						<p class="text-sm font-semibold text-amaranto-700">{formatta(e.data.data)}</p>
+						<h3 class="font-display text-xl uppercase text-giallo-700 mt-1">{e.data.titolo}</h3>
+						{e.data.luogo && <p class="text-sm text-gray-500 mt-1">{e.data.luogo}</p>}
+						<p class="text-sm text-gray-600 mt-2">{e.data.descrizione}</p>
+					</div>
+				))}
+			</div>
+		) : (
+			<p class="mt-6 text-gray-500 italic">Nessun evento in programma al momento. Torna presto!</p>
+		)}
+
+		{passati.length > 0 && (
+			<>
+				<h2 class="font-display text-2xl uppercase text-giallo-600 mt-14">Eventi passati</h2>
+				<div class="mt-6 space-y-4">
+					{passati.map((e) => (
+						<div class="bg-white rounded-2xl p-6 border-l-4 border-giallo-300 opacity-80">
+							<p class="text-sm font-semibold text-gray-400">{formatta(e.data.data)}</p>
+							<h3 class="font-display text-xl uppercase text-gray-600 mt-1">{e.data.titolo}</h3>
+							{e.data.luogo && <p class="text-sm text-gray-400 mt-1">{e.data.luogo}</p>}
+						</div>
+					))}
 				</div>
-			))}
-		</div>
+			</>
+		)}
 	</div>
 </Layout>
