@@ -1,7 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const pillole = [
+	{ href: '/palio', label: 'Faenza ~ Palio del Niballo' },
+	{ href: '/palio', label: 'Scuderie' },
+	{ href: '/palio', label: 'Storia del palio' },
+	{ href: '/news', label: 'News' },
+];
 ---
 
 <Layout title="Rione Giallo">
-	<h1 class="text-4xl font-bold text-yellow-500 px-4 py-8">Rione Giallo</h1>
+	<section class="relative min-h-[calc(100vh-64px)] bg-yellow-600 overflow-hidden flex items-center">
+		<div class="absolute inset-0 bg-gradient-to-b from-yellow-500/30 to-yellow-950/60"></div>
+
+		<div class="relative z-10 px-6 sm:px-12 max-w-6xl w-full">
+			<h1 class="text-6xl sm:text-8xl font-black leading-none tracking-tight">
+				<span class="block text-white">RIONE</span>
+				<span class="block text-white">GIALLO</span>
+				<span class="block text-white">È</span>
+				<span class="block text-yellow-950">PALIO</span>
+			</h1>
+
+			<div class="mt-8 flex flex-wrap gap-3 max-w-2xl">
+				{pillole.map((p) => (
+					<a href={p.href} class="px-5 py-2.5 rounded-full border-2 border-white text-white font-medium text-sm sm:text-base hover:bg-white hover:text-yellow-950 transition">
+						{p.label}
+					</a>
+				))}
+			</div>
+		</div>
+
+		<div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+			<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</div>
+	</section>
 </Layout>

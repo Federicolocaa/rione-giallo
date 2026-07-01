@@ -1,3 +1,32 @@
-<footer class="bg-yellow-950 text-yellow-50 text-sm text-center py-4">
-	<p>&copy; {new Date().getFullYear()} Rione Giallo — Faenza</p>
+---
+const social = [
+	{ href: '#', label: 'Instagram' },
+	{ href: '#', label: 'Facebook' },
+];
+---
+
+<footer class="bg-yellow-950 text-yellow-50 mt-16">
+	<div class="max-w-5xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-3">
+		<div>
+			<p class="font-bold text-lg">Rione Giallo</p>
+			<p class="text-sm text-yellow-200 mt-2">Via Bondiolo 85<br />Faenza (RA)</p>
+		</div>
+		<div>
+			<p class="font-semibold text-sm uppercase tracking-wide text-yellow-300">Seguici</p>
+			<ul class="mt-2 space-y-1 text-sm">
+				{social.map((s) => (
+					<li><a href={s.href} class="text-yellow-100 hover:text-white hover:underline">{s.label}</a></li>
+				))}
+			</ul>
+		</div>
+		<div>
+			<p class="font-semibold text-sm uppercase tracking-wide text-yellow-300">Contatti</p>
+			<ul class="mt-2 space-y-1 text-sm">
+				<li><a href="/contatti" class="text-yellow-100 hover:text-white hover:underline">Scrivici</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="border-t border-yellow-900 py-4 text-center text-xs text-yellow-300">
+		<p>&copy; {new Date().getFullYear()} Rione Giallo — Faenza</p>
+	</div>
 </footer>
