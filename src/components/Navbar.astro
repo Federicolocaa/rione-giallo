@@ -1,0 +1,21 @@
+---
+const links = [
+	{ href: '/storia', label: 'Storia' },
+	{ href: '/squadra', label: 'Squadra' },
+	{ href: '/palio-eventi', label: 'Palio & eventi' },
+	{ href: '/news', label: 'News' },
+	{ href: '/galleria', label: 'Galleria' },
+	{ href: '/contatti', label: 'Contatti' },
+];
+---
+
+<header class="bg-yellow-500 text-yellow-950">
+	<nav class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+		<a href="/" class="font-bold text-lg">Rione Giallo</a>
+		<ul class="flex gap-4 text-sm">
+			{links.map((link) => (
+				<li><a href={link.href} class="hover:underline">{link.label}</a></li>
+			))}
+		</ul>
+	</nav>
+</header>
