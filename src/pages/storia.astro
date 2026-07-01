@@ -1,7 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AreaHub from '../components/AreaHub.astro';
+
+const sottopagine = [
+	{ href: '/storia/costumi', titolo: 'Costumi', desc: 'Gli abiti rinascimentali del corteo rionale.' },
+	{ href: '/storia/sfilata', titolo: 'La sfilata', desc: 'Il corteo storico da Porta Ponte al campo.' },
+	{ href: '/storia/dame', titolo: 'Le dame', desc: 'L\'eleganza della corte manfreda.' },
+	{ href: '/storia/rievocazione', titolo: 'Rievocazione', desc: 'La signoria dei Manfredi rivive ogni anno.' },
+];
 ---
+
 <Layout title="Storia — Rione Giallo">
-	<AreaHub titolo="Storia" sottopagine={["Costumi", "La sfilata", "Le dame", "Rievocazione"]} />
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Storia</h1>
+		<p class="mt-4 text-lg text-gray-700">
+			Il Rione Giallo di Porta Ponte, legato al casato dei Manfredi, e la rievocazione che ogni
+			anno riporta in vita la Faenza rinascimentale.
+		</p>
+		<div class="mt-10 grid gap-6 sm:grid-cols-2">
+			{sottopagine.map((s) => (
+				<a href={s.href} class="group block bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600 hover:bg-giallo-100 transition">
+					<h2 class="font-display text-xl uppercase text-giallo-700 group-hover:text-giallo-800">{s.titolo}</h2>
+					<p class="mt-2 text-sm text-gray-600">{s.desc}</p>
+				</a>
+			))}
+		</div>
+	</div>
 </Layout>

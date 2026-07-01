@@ -1,7 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AreaHub from '../components/AreaHub.astro';
+
+const sottopagine = [
+	{ href: '/palio/niballo', titolo: 'Palio del Niballo', desc: 'La giostra cavalleresca tra i cinque rioni.' },
+	{ href: '/palio/scuderie', titolo: 'Le scuderie', desc: 'I cavalieri e il patrimonio equino del rione.' },
+	{ href: '/palio/storia', titolo: 'Storia del palio', desc: 'Dalle origini medievali al Palio moderno.' },
+];
 ---
+
 <Layout title="Palio — Rione Giallo">
-	<AreaHub titolo="Palio" sottopagine={["Palio del Niballo", "Le scuderie", "Storia del palio", "News"]} />
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Palio</h1>
+		<p class="mt-4 text-lg text-gray-700">La giostra, i cavalieri e la storia del Niballo.</p>
+		<div class="mt-10 grid gap-6 sm:grid-cols-3">
+			{sottopagine.map((s) => (
+				<a href={s.href} class="group block bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600 hover:bg-giallo-100 transition">
+					<h2 class="font-display text-xl uppercase text-giallo-700 group-hover:text-giallo-800">{s.titolo}</h2>
+					<p class="mt-2 text-sm text-gray-600">{s.desc}</p>
+				</a>
+			))}
+		</div>
+	</div>
 </Layout>

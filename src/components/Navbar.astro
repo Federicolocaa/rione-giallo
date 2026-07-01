@@ -3,7 +3,7 @@ const utility = [
 	{ href: '/', label: 'Home' },
 	{ href: '/giugno', label: 'Giugno' },
 	{ href: '/news', label: 'News' },
-	{ href: '/albo-doro', label: "Albod'Oro" },
+	{ href: '/albo-doro', label: "Albo d'Oro" },
 	{ href: '/contatti', label: 'Contatti' },
 ];
 
@@ -11,89 +11,86 @@ const aree = [
 	{
 		label: 'Palio',
 		voci: [
-			{ href: '/palio', label: 'Palio del Niballo' },
-			{ href: '/palio', label: 'Le scuderie' },
-			{ href: '/palio', label: 'Storia del palio' },
-			{ href: '/news', label: 'News' },
+			{ href: '/palio/niballo', label: 'Palio del Niballo' },
+			{ href: '/palio/scuderie', label: 'Le scuderie' },
+			{ href: '/palio/storia', label: 'Storia del palio' },
+			{ href: '/giugno', label: 'Countdown' },
 		],
 	},
 	{
-		label: 'Piazza',
+		label: 'Piazza del Popolo',
 		voci: [
-			{ href: '/piazza', label: 'Gruppo storico' },
-			{ href: '/piazza', label: 'Torneo alfieri e musici' },
-			{ href: '/piazza', label: 'Nott de Bisó' },
+			{ href: '/piazza/gruppo-storico', label: 'Gruppo storico' },
+			{ href: '/piazza/torneo', label: 'Torneo alfieri e musici' },
+			{ href: '/piazza/nott-de-biso', label: 'Nott de Bisó' },
 			{ href: '/albo-doro', label: "Albo d'oro" },
 		],
 	},
 	{
 		label: 'Via Bondiolo',
 		voci: [
-			{ href: '/via-bondiolo', label: 'La sede' },
-			{ href: '/via-bondiolo', label: 'Il quartiere' },
-			{ href: '/via-bondiolo', label: 'Sala delle bandiere' },
-			{ href: '/via-bondiolo', label: 'Soci' },
-			{ href: '/via-bondiolo', label: 'Eventi' },
+			{ href: '/via-bondiolo/sede', label: 'La sede' },
+			{ href: '/via-bondiolo/consiglio', label: 'Consiglio direttivo' },
+			{ href: '/via-bondiolo/soci', label: 'Soci' },
+			{ href: '/via-bondiolo/inno', label: 'Inno' },
+			{ href: '/eventi', label: 'Eventi' },
 		],
 	},
 	{
 		label: 'Storia',
 		voci: [
-			{ href: '/storia', label: 'Costumi' },
-			{ href: '/storia', label: 'La sfilata' },
-			{ href: '/storia', label: 'Le dame' },
-			{ href: '/storia', label: 'Rievocazione' },
-		],
-	},
-	{
-		label: 'Chi siamo',
-		voci: [
-			{ href: '/chi-siamo', label: 'Chi siamo' },
-			{ href: '/chi-siamo', label: 'Collaborazioni' },
-			{ href: '/contatti', label: 'Contatti' },
-			{ href: '/chi-siamo', label: 'Ringraziamenti' },
+			{ href: '/storia/costumi', label: 'Costumi' },
+			{ href: '/storia/sfilata', label: 'La sfilata' },
+			{ href: '/storia/dame', label: 'Le dame' },
+			{ href: '/storia/rievocazione', label: 'Rievocazione' },
 		],
 	},
 ];
 ---
 
-<header class="bg-yellow-500 text-yellow-950 relative z-40">
+<header class="bg-giallo-500 text-giallo-950 relative z-40 border-b-2 border-amaranto-700">
 	<div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-		<button id="menu-open" aria-label="Apri menu" class="p-1">
+		<button id="menu-open" aria-label="Apri menu" class="p-1 hover:text-amaranto-700 transition">
 			<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/>
 			</svg>
 		</button>
-		<ul class="flex gap-5 text-sm font-medium">
+		<a href="/" class="flex items-center gap-2">
+			<img src="/logo.png" alt="Rione Giallo" class="h-10 w-auto" onerror="this.style.display='none'" />
+			<span class="font-display text-xl uppercase tracking-wide">Rione Giallo</span>
+		</a>
+		<ul class="hidden sm:flex gap-5 text-sm font-medium">
 			{utility.map((l) => (
-				<li><a href={l.href} class="hover:underline">{l.label}</a></li>
+				<li><a href={l.href} class="hover:text-amaranto-700 transition">{l.label}</a></li>
 			))}
 		</ul>
 	</div>
 </header>
 
-<div id="menu-overlay" class="fixed inset-0 z-50 bg-yellow-950 text-yellow-50 hidden overflow-y-auto">
+<div id="menu-overlay" class="fixed inset-0 z-50 bg-amaranto-950 text-giallo-50 hidden overflow-y-auto">
 	<div class="max-w-6xl mx-auto px-6 py-8">
-		<button id="menu-close" aria-label="Chiudi menu" class="absolute top-6 right-6 p-1">
+		<button id="menu-close" aria-label="Chiudi menu" class="absolute top-6 right-6 p-1 hover:text-giallo-400 transition">
 			<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
 			</svg>
 		</button>
 
-		<h2 class="text-6xl font-bold mb-8">MENU</h2>
-		<a href="/" class="block text-lg font-semibold mb-6 hover:underline">HOME</a>
+		<img src="/logo.png" alt="Rione Giallo" class="h-16 w-auto mb-6" onerror="this.style.display='none'" />
+		<h2 class="font-display text-6xl mb-8 uppercase text-giallo-400">MENU</h2>
+		<a href="/" class="block text-lg font-semibold mb-6 hover:text-giallo-400 transition">HOME</a>
 
 		<div class="space-y-3 max-w-md">
 			{aree.map((area) => (
 				<div class="area">
-						<button class="area-toggle w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-yellow-950 via-yellow-600 to-yellow-400 text-white rounded-full font-bold text-lg shadow-lg hover:scale-[1.02] transition-transform">						{area.label}
+					<button class="area-toggle w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-amaranto-900 via-amaranto-600 to-giallo-400 text-white rounded-full font-bold text-lg shadow-lg hover:scale-[1.02] transition-transform">
+						{area.label}
 						<svg class="chevron w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</button>
 					<ul class="area-voci hidden pl-5 py-2 space-y-1">
 						{area.voci.map((voce) => (
-							<li><a href={voce.href} class="block py-1.5 text-yellow-100 hover:text-white hover:underline">{voce.label}</a></li>
+							<li><a href={voce.href} class="block py-1.5 text-giallo-100 hover:text-white hover:underline">{voce.label}</a></li>
 						))}
 					</ul>
 				</div>
@@ -101,8 +98,9 @@ const aree = [
 		</div>
 
 		<div class="mt-8 space-y-4 max-w-md">
-			<a href="/giugno" class="block text-lg font-semibold hover:underline">GIUGNO</a>
-			<a href="/news" class="block text-lg font-semibold hover:underline">NEWS & EVENTI</a>
+			<a href="/giugno" class="block text-lg font-semibold hover:text-giallo-400 transition">GIUGNO</a>
+			<a href="/news" class="block text-lg font-semibold hover:text-giallo-400 transition">NEWS & EVENTI</a>
+			<a href="/contatti" class="block text-lg font-semibold hover:text-giallo-400 transition">CONTATTI</a>
 		</div>
 	</div>
 </div>

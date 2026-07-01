@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 230">
+	<defs>
+		<clipPath id="corpoTorre"><rect x="12" y="46" width="36" height="184"/></clipPath>
+	</defs>
+	<rect x="12" y="46" width="36" height="184" fill="#eab308"/>
+	<rect x="8" y="30" width="10" height="20" fill="#eab308"/>
+	<rect x="25" y="30" width="10" height="20" fill="#eab308"/>
+	<rect x="42" y="30" width="10" height="20" fill="#eab308"/>
+	<g clip-path="url(#corpoTorre)">
+		<rect x="-4" y="74" width="72" height="13" fill="#a91d47" transform="rotate(-14 30 80)"/>
+		<rect x="-4" y="126" width="72" height="13" fill="#a91d47" transform="rotate(-14 30 132)"/>
+		<rect x="-4" y="178" width="72" height="13" fill="#a91d47" transform="rotate(-14 30 184)"/>
+	</g>
+</svg>

@@ -1,7 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AreaHub from '../components/AreaHub.astro';
+
+const sottopagine = [
+	{ href: '/via-bondiolo/sede', titolo: 'La sede', desc: 'Il cuore del rione in via Bondiolo 85.' },
+	{ href: '/via-bondiolo/consiglio', titolo: 'Consiglio direttivo', desc: 'Capo Rione, capitani e organi del rione.' },
+	{ href: '/via-bondiolo/soci', titolo: 'Soci', desc: 'I gruppi e le persone che animano il rione.' },
+	{ href: '/via-bondiolo/inno', titolo: 'Inno', desc: 'La marcia che accompagna il Rione Giallo.' },
+	{ href: '/eventi', titolo: 'Eventi', desc: 'Gli appuntamenti del rione durante l\'anno.' },
+];
 ---
-<Layout title="Via Bondiolo 85 — Rione Giallo">
-	<AreaHub titolo="Via Bondiolo 85" sottopagine={["La sede", "Il quartiere", "Sala delle bandiere", "Soci", "Eventi"]} />
+
+<Layout title="Via Bondiolo — Rione Giallo">
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Via Bondiolo</h1>
+		<p class="mt-4 text-lg text-gray-700">La sede, gli organi e la vita quotidiana del Rione Giallo.</p>
+		<div class="mt-10 grid gap-6 sm:grid-cols-2">
+			{sottopagine.map((s) => (
+				<a href={s.href} class="group block bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600 hover:bg-giallo-100 transition">
+					<h2 class="font-display text-xl uppercase text-giallo-700 group-hover:text-giallo-800">{s.titolo}</h2>
+					<p class="mt-2 text-sm text-gray-600">{s.desc}</p>
+				</a>
+			))}
+		</div>
+	</div>
 </Layout>

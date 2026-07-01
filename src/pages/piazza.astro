@@ -1,7 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AreaHub from '../components/AreaHub.astro';
+
+const sottopagine = [
+	{ href: '/piazza/gruppo-storico', titolo: 'Gruppo storico', desc: 'Sbandieratori, musici e figuranti del rione.' },
+	{ href: '/piazza/torneo', titolo: 'Torneo alfieri e musici', desc: 'Le gare delle bandiere in Piazza del Popolo.' },
+	{ href: '/piazza/nott-de-biso', titolo: 'Nott de Bisó', desc: 'La notte del 5 gennaio che chiude il Palio.' },
+];
 ---
-<Layout title="Piazza — Rione Giallo">
-	<AreaHub titolo="Piazza" sottopagine={["Gruppo storico", "Torneo alfieri e musici", "Nott de Bisó", "Albo d'oro"]} />
+
+<Layout title="Piazza del Popolo — Rione Giallo">
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Piazza del Popolo</h1>
+		<p class="mt-4 text-lg text-gray-700">Il cuore delle bandiere, delle sfide e delle tradizioni del rione.</p>
+		<div class="mt-10 grid gap-6 sm:grid-cols-3">
+			{sottopagine.map((s) => (
+				<a href={s.href} class="group block bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600 hover:bg-giallo-100 transition">
+					<h2 class="font-display text-xl uppercase text-giallo-700 group-hover:text-giallo-800">{s.titolo}</h2>
+					<p class="mt-2 text-sm text-gray-600">{s.desc}</p>
+				</a>
+			))}
+		</div>
+	</div>
 </Layout>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const eventi = [
+	{ data: 'Da definire', titolo: 'Cena propiziatoria', desc: 'Il tradizionale ritrovo conviviale prima del Palio.' },
+];
+---
+
+<Layout title="Eventi — Rione Giallo">
+	<div class="max-w-3xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Eventi</h1>
+		<p class="mt-4 text-gray-600">Tutti gli appuntamenti del rione durante l'anno. Aggiornati man mano.</p>
+		<div class="mt-10 space-y-4">
+			{eventi.map((e) => (
+				<div class="bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
+					<p class="text-sm font-semibold text-amaranto-700">{e.data}</p>
+					<h2 class="font-display text-xl uppercase text-giallo-700 mt-1">{e.titolo}</h2>
+					<p class="text-sm text-gray-600 mt-1">{e.desc}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>

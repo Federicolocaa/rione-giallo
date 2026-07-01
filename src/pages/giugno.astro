@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const annoCorrente = new Date().getFullYear();
+const anni = [annoCorrente, annoCorrente + 1];
+
+const eventi = [
+	{ titolo: 'Gare Under 15 e Under 21', desc: 'Torneo alfieri e musici, categorie giovanili in Piazza del Popolo.' },
+	{ titolo: "Torneo della Bigorda d'Oro", desc: 'Seconda domenica di giugno, in notturna. Riservato ai giovani cavalieri esordienti.' },
+	{ titolo: 'Gare Assoluti', desc: 'Singolo, Coppia, Piccola e Grande Squadra degli sbandieratori.' },
+	{ titolo: 'Palio del Niballo', desc: 'Quarta domenica di giugno. La giostra cavalleresca tra i cinque rioni.' },
+];
+---
+
+<Layout title="Giugno — Rione Giallo">
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<div class="flex items-baseline gap-4 flex-wrap">
+			<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Giugno</h1>
+			<div class="flex gap-2" id="anni">
+				{anni.map((a, idx) => (
+					<button data-anno={a} class={`anno-btn px-4 py-1.5 rounded-full font-semibold text-sm transition ${idx === 0 ? 'bg-amaranto-700 text-white' : 'bg-giallo-100 text-amaranto-700'}`}>{a}</button>
+				))}
+			</div>
+		</div>
+		<p class="mt-4 text-gray-600">Le date importanti del mese del Palio. Gli orari esatti vengono confermati ogni anno.</p>
+
+		<div class="mt-10 space-y-4">
+			{eventi.map((e) => (
+				<div class="flex gap-4 items-start bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
+					<div class="font-display text-3xl text-amaranto-700 shrink-0">GIU</div>
+					<div>
+						<h2 class="font-display text-xl uppercase text-giallo-700">{e.titolo}</h2>
+						<p class="text-sm text-gray-600 mt-1">{e.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	<script>
+		document.querySelectorAll('.anno-btn').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				document.querySelectorAll('.anno-btn').forEach((b) => {
+					b.classList.remove('bg-amaranto-700', 'text-white');
+					b.classList.add('bg-giallo-100', 'text-amaranto-700');
+				});
+				btn.classList.remove('bg-giallo-100', 'text-amaranto-700');
+				btn.classList.add('bg-amaranto-700', 'text-white');
+			});
+		});
+	</script>
+</Layout>

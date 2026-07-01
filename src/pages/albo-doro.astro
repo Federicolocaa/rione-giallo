@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const vittoriePalio = [
+	{ anno: '2017', cavaliere: 'Daniele Ravagli', nota: "L'ultima vittoria del rione al Niballo." },
+	{ anno: '2013', cavaliere: 'Daniele Ravagli', nota: 'Il ritorno al successo dopo 44 anni di attesa.' },
+	{ anno: '1969', cavaliere: 'Vittorio Zama', nota: 'Il primo drappo del Palio moderno per il rione.' },
+];
+
+const assoluti = [
+	{
+		specialita: 'Coppia della Botte',
+		nota: 'La gara più antica e prestigiosa, dal 1964.',
+		vittorie: [
+			{ anno: '2026', nome: 'Simone Lionetti e Federico Locatelli' },
+			{ anno: '2023', nome: 'Luca Ghinassi e Davide Lionetti' },
+			{ anno: '2017', nome: 'Simone Lionetti e Nicolò Benedetti' },
+			{ anno: '1965', nome: 'Bruno Porri e Giancarlo Ravaglioli' },
+			{ anno: '1964', nome: 'Bruno Porri e Giordano Solaroli' },
+		],
+	},
+	{
+		specialita: 'Singolo',
+		nota: null,
+		vittorie: [
+			{ anno: '2023', nome: 'Luca Ghinassi' },
+			{ anno: '2018', nome: 'Nicolò Benedetti' },
+		],
+	},
+	{
+		specialita: 'Piccola Squadra',
+		nota: null,
+		vittorie: [
+			{ anno: '2023', nome: 'L. Ghinassi, S. Lionetti, N. Benedetti, D. Lionetti, M. Pasi, L. G. Corvino' },
+			{ anno: '2022', nome: 'Nomi non disponibili' },
+			{ anno: '2021', nome: 'Nomi non disponibili' },
+			{ anno: '2002', nome: 'Nomi non disponibili' },
+			{ anno: '2001', nome: 'Nomi non disponibili' },
+			{ anno: '1988', nome: 'Nomi non disponibili' },
+		],
+	},
+	{
+		specialita: 'Tamburino della Botte',
+		nota: null,
+		vittorie: [
+			{ anno: '2013', nome: 'Mattia Testa' },
+			{ anno: '2012', nome: 'Mattia Testa' },
+		],
+	},
+	{
+		specialita: 'Grande Squadra',
+		nota: 'Palmarès ancora aperto.',
+		vittorie: [],
+	},
+	{
+		specialita: 'Musici',
+		nota: null,
+		vittorie: [],
+	},
+];
+
+const u21 = [
+	{
+		specialita: 'Singolo U21',
+		nota: null,
+		vittorie: [
+			{ anno: '2026', nome: 'Federico Locatelli' },
+			{ anno: '2023', nome: 'Davide Lionetti' },
+			{ anno: '2022', nome: 'Luca Ghinassi' },
+		],
+	},
+	{
+		specialita: 'Coppia U21',
+		nota: null,
+		vittorie: [
+			{ anno: '2025', nome: 'Nomi da completare' },
+			{ anno: '2024', nome: 'Federico Locatelli e Kevin Liverani' },
+			{ anno: '2023', nome: 'Luca Ghinassi e Davide Lionetti' },
+			{ anno: '2022', nome: 'Luca Ghinassi e Luca Giuseppe Corvino' },
+		],
+	},
+	{
+		specialita: 'Tamburino U21',
+		nota: null,
+		vittorie: [],
+	},
+];
+---
+
+<Layout title="Albo d'Oro — Rione Giallo">
+	<div class="max-w-4xl mx-auto px-6 py-12">
+		<h1 class="font-display text-5xl sm:text-6xl uppercase text-amaranto-800">Albo d'Oro</h1>
+		<p class="mt-4 text-lg text-gray-700">
+			Le vittorie del Rione Giallo di Porta Ponte — in pista e in piazza.
+		</p>
+
+		<!-- ===================== CORSE ===================== -->
+		<div class="mt-14">
+			<div class="flex items-center gap-3">
+				<span class="w-3 h-8 bg-amaranto-700 rounded"></span>
+				<h2 class="font-display text-4xl uppercase text-amaranto-800">Le corse</h2>
+			</div>
+			<p class="mt-2 text-gray-600">Palio del Niballo — i cavalieri del rione.</p>
+
+			<div class="mt-8 grid gap-6 sm:grid-cols-3">
+				<div class="bg-amaranto-900 text-white rounded-2xl p-8 text-center">
+					<p class="font-display text-6xl text-giallo-400">3</p>
+					<p class="mt-2 text-sm uppercase tracking-widest text-giallo-200">Palii del Niballo</p>
+				</div>
+				<div class="bg-giallo-50 rounded-2xl p-8 text-center border-l-4 border-amaranto-600">
+					<p class="font-display text-6xl text-amaranto-700">225</p>
+					<p class="mt-2 text-sm uppercase tracking-widest text-giallo-700">Scudi conquistati</p>
+				</div>
+				<div class="bg-giallo-50 rounded-2xl p-8 text-center border-l-4 border-amaranto-600">
+					<p class="font-display text-6xl text-amaranto-700">1969</p>
+					<p class="mt-2 text-sm uppercase tracking-widest text-giallo-700">Prima vittoria</p>
+				</div>
+			</div>
+
+			<h3 class="font-display text-2xl uppercase text-giallo-600 mt-10">Vittorie al Palio del Niballo</h3>
+			<div class="mt-6 space-y-4">
+				{vittoriePalio.map((v) => (
+					<div class="flex gap-6 items-center bg-white rounded-2xl p-6 border-l-4 border-giallo-500 shadow-sm">
+						<div class="font-display text-4xl text-amaranto-700 shrink-0 w-24">{v.anno}</div>
+						<div>
+							<p class="font-semibold text-amaranto-900">{v.cavaliere}</p>
+							<p class="text-sm text-gray-600 mt-1">{v.nota}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- ===================== PIAZZA - ASSOLUTI ===================== -->
+		<div class="mt-20">
+			<div class="flex items-center gap-3">
+				<span class="w-3 h-8 bg-giallo-500 rounded"></span>
+				<h2 class="font-display text-4xl uppercase text-amaranto-800">La piazza — Assoluti</h2>
+			</div>
+			<p class="mt-2 text-gray-600">Bandiere e musici — le gare degli sbandieratori del rione.</p>
+
+			<div class="mt-8 space-y-6">
+				{assoluti.map((s) => (
+					<div class="bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
+						<div class="flex items-baseline justify-between flex-wrap gap-2">
+							<p class="font-display text-xl uppercase text-amaranto-800">{s.specialita}</p>
+							<span class="text-sm font-semibold text-giallo-700">{s.vittorie.length} {s.vittorie.length === 1 ? 'vittoria' : 'vittorie'}</span>
+						</div>
+						{s.nota && <p class="text-sm text-gray-500 mt-1">{s.nota}</p>}
+						{s.vittorie.length > 0 ? (
+							<ul class="mt-3 space-y-1.5">
+								{s.vittorie.map((w) => (
+									<li class="text-sm text-gray-700"><span class="font-semibold text-amaranto-700 mr-2">{w.anno}</span>{w.nome}</li>
+								))}
+							</ul>
+						) : (
+							<p class="mt-2 text-sm text-gray-400 italic">Nessuna vittoria a oggi</p>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- ===================== PIAZZA - UNDER 21 ===================== -->
+		<div class="mt-16">
+			<div class="flex items-center gap-3">
+				<span class="w-3 h-8 bg-giallo-500 rounded"></span>
+				<h2 class="font-display text-4xl uppercase text-amaranto-800">La piazza — Under 21</h2>
+			</div>
+			<p class="mt-2 text-gray-600">Il vivaio del rione: le vittorie dei giovani alfieri.</p>
+
+			<div class="mt-8 space-y-6">
+				{u21.map((s) => (
+					<div class="bg-giallo-50 rounded-2xl p-6 border-l-4 border-amaranto-600">
+						<div class="flex items-baseline justify-between flex-wrap gap-2">
+							<p class="font-display text-xl uppercase text-amaranto-800">{s.specialita}</p>
+							<span class="text-sm font-semibold text-giallo-700">{s.vittorie.length} {s.vittorie.length === 1 ? 'vittoria' : 'vittorie'}</span>
+						</div>
+						{s.vittorie.length > 0 ? (
+							<ul class="mt-3 space-y-1.5">
+								{s.vittorie.map((w) => (
+									<li class="text-sm text-gray-700"><span class="font-semibold text-amaranto-700 mr-2">{w.anno}</span>{w.nome}</li>
+								))}
+							</ul>
+						) : (
+							<p class="mt-2 text-sm text-gray-400 italic">Da completare dagli archivi del rione</p>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+
+		<p class="mt-14 text-sm text-gray-500 border-t border-giallo-200 pt-6">
+			Fonti: archivi del rione e del Niballo — Palio di Faenza. Alcune annate e formazioni
+			sono in fase di completamento.
+		</p>
+	</div>
+</Layout>

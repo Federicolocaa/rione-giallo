@@ -1,39 +1,141 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const pillole = [
-	{ href: '/palio', label: 'Faenza ~ Palio del Niballo' },
-	{ href: '/palio', label: 'Scuderie' },
-	{ href: '/palio', label: 'Storia del palio' },
-	{ href: '/news', label: 'News' },
+const categorie = [
+	{
+		parola: 'PALIO',
+		video: '/video/palio.mp4',
+		pillole: [
+			{ href: '/palio/niballo', label: 'Palio del Niballo' },
+			{ href: '/palio/scuderie', label: 'Le scuderie' },
+			{ href: '/palio/storia', label: 'Storia del palio' },
+			{ href: '/giugno', label: 'Countdown' },
+		],
+	},
+	{
+		parola: 'PIAZZA',
+		video: '/video/piazza.mp4',
+		pillole: [
+			{ href: '/piazza/gruppo-storico', label: 'Gruppo storico' },
+			{ href: '/piazza/torneo', label: 'Torneo alfieri e musici' },
+			{ href: '/piazza/nott-de-biso', label: 'Nott de Bisó' },
+			{ href: '/albo-doro', label: "Albo d'oro" },
+		],
+	},
+	{
+		parola: 'SEDE',
+		video: '/video/sede.mp4',
+		pillole: [
+			{ href: '/via-bondiolo/sede', label: 'La sede' },
+			{ href: '/via-bondiolo/consiglio', label: 'Consiglio direttivo' },
+			{ href: '/via-bondiolo/soci', label: 'Soci' },
+			{ href: '/eventi', label: 'Eventi' },
+		],
+	},
+	{
+		parola: 'STORIA',
+		video: '/video/storia.mp4',
+		pillole: [
+			{ href: '/storia/costumi', label: 'Costumi' },
+			{ href: '/storia/sfilata', label: 'La sfilata' },
+			{ href: '/storia/dame', label: 'Le dame' },
+			{ href: '/storia/rievocazione', label: 'Rievocazione' },
+		],
+	},
 ];
 ---
 
 <Layout title="Rione Giallo">
-	<section class="relative min-h-[calc(100vh-64px)] bg-yellow-600 overflow-hidden flex items-center">
-		<div class="absolute inset-0 bg-gradient-to-b from-yellow-500/30 to-yellow-950/60"></div>
+	<section class="relative h-[calc(100vh-64px)] overflow-hidden flex items-center select-none">
+		<video id="hero-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+			<source src="/video/palio.mp4" type="video/mp4" />
+		</video>
+		<div class="absolute inset-0 bg-amaranto-950/50"></div>
+		<div class="absolute inset-0 bg-gradient-to-b from-giallo-500/10 to-amaranto-950/70"></div>
 
 		<div class="relative z-10 px-6 sm:px-12 max-w-6xl w-full">
-			<h1 class="text-6xl sm:text-8xl font-black leading-none tracking-tight">
-				<span class="block text-white">RIONE</span>
-				<span class="block text-white">GIALLO</span>
-				<span class="block text-white">È</span>
-				<span class="block text-yellow-950">PALIO</span>
+			<h1 class="font-display text-6xl sm:text-8xl leading-none tracking-tight uppercase drop-shadow-lg">
+				<span class="block text-white">R<img src="/torre.svg" alt="i" class="inline-block h-[0.9em] w-auto align-[-0.14em] mx-[0.04em]" />one</span>
+				<span class="block text-white">Giallo</span>
+				<span class="block text-white">è <span id="parola-rotante" class="text-giallo-400 transition-opacity duration-300">PALIO</span></span>
 			</h1>
 
-			<div class="mt-8 flex flex-wrap gap-3 max-w-2xl">
-				{pillole.map((p) => (
-					<a href={p.href} class="px-5 py-2.5 rounded-full border-2 border-white text-white font-medium text-sm sm:text-base hover:bg-white hover:text-yellow-950 transition">
+			<div id="pillole" class="mt-8 flex flex-wrap gap-3 max-w-2xl transition-opacity duration-300">
+				{categorie[0].pillole.map((p) => (
+					<a href={p.href} class="px-5 py-2.5 rounded-full border-2 border-giallo-400 text-white font-medium text-sm sm:text-base hover:bg-giallo-400 hover:text-amaranto-950 transition backdrop-blur-sm">
 						{p.label}
 					</a>
 				))}
 			</div>
 		</div>
 
-		<div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-			<svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<div class="absolute bottom-8 left-0 right-0 z-10 flex flex-col items-center gap-3">
+			<div id="dots" class="flex gap-2">
+				{categorie.map((_, idx) => (
+					<span data-dot={idx} class={`w-2.5 h-2.5 rounded-full transition ${idx === 0 ? 'bg-giallo-400' : 'bg-white/40'}`}></span>
+				))}
+			</div>
+			<svg class="w-7 h-7 text-giallo-400 drop-shadow animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 		</div>
 	</section>
+
+	<script define:vars={{ categorie }}>
+		const elParola = document.getElementById('parola-rotante');
+		const elPillole = document.getElementById('pillole');
+		const elVideo = document.getElementById('hero-video');
+		const dots = document.querySelectorAll('[data-dot]');
+		let i = 0;
+		let inCorso = false;
+
+		function render(indice) {
+			elParola.style.opacity = '0';
+			elPillole.style.opacity = '0';
+			setTimeout(() => {
+				const cat = categorie[indice];
+				elParola.textContent = cat.parola;
+				elPillole.innerHTML = cat.pillole
+					.map(
+						(p) =>
+							`<a href="${p.href}" class="px-5 py-2.5 rounded-full border-2 border-giallo-400 text-white font-medium text-sm sm:text-base hover:bg-giallo-400 hover:text-amaranto-950 transition backdrop-blur-sm">${p.label}</a>`
+					)
+					.join('');
+				const src = elVideo.querySelector('source');
+				if (src.getAttribute('src') !== cat.video) {
+					src.setAttribute('src', cat.video);
+					elVideo.load();
+				}
+				dots.forEach((d, idx) => {
+					d.classList.toggle('bg-giallo-400', idx === indice);
+					d.classList.toggle('bg-white/40', idx !== indice);
+				});
+				elParola.style.opacity = '1';
+				elPillole.style.opacity = '1';
+			}, 300);
+		}
+
+		function cambia(direzione) {
+			if (inCorso) return;
+			const nuovo = i + direzione;
+			if (nuovo < 0 || nuovo >= categorie.length) return;
+			inCorso = true;
+			i = nuovo;
+			render(i);
+			setTimeout(() => { inCorso = false; }, 800);
+		}
+
+		window.addEventListener('wheel', (e) => {
+			e.preventDefault();
+			if (Math.abs(e.deltaY) < 10) return;
+			cambia(e.deltaY > 0 ? 1 : -1);
+		}, { passive: false });
+
+		let touchStartY = 0;
+		window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+		window.addEventListener('touchend', (e) => {
+			const diff = touchStartY - e.changedTouches[0].clientY;
+			if (Math.abs(diff) > 40) cambia(diff > 0 ? 1 : -1);
+		}, { passive: true });
+	</script>
 </Layout>
